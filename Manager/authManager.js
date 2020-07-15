@@ -28,5 +28,6 @@ async function sign_up_manager(username, mail, password){
     return result;
 }
 module.exports = {
-    sign_in_manager
+    sign_in_manager,
+    sign_up_manager
 }

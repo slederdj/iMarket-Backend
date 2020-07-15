@@ -16,14 +16,10 @@ function getStatus(estado, mensaje, dato, res) {
             envio = new envio("No hay datos almacenados", [])
             res.status(HttpStatus.ACCEPTED).send(envio);
             break;
-        case HttpStatus.CONTINUE:
-            envio = new Envio(mensaje,[])
-            res.status(HttpStatus.CONTINUE).send(envio);
+        default:
+            envio = new Envio(mensaje, dato);
+            res.status(HttpStatus.OK).send(envio);
             break;
-            default:
-                envio = new Envio(mensaje, dato);
-                res.status(HttpStatus.OK).send(envio);
-                break;
     }
 }
 

@@ -11,7 +11,6 @@ app.post('/login', async function(req, res) {
         req.body.mail,
         req.body.password
     );
-    console.log(answer);
     if (answer["status"] === HttpStatus.CONTINUE) {
         let token = await jwt.sign(answer["data"], process.env.SEED);
         res.status(HttpStatus.OK).send({ "token": token, "mensaje": answer["msg"], "data": answer["data"], "code": answer["code"]});
@@ -26,7 +25,7 @@ app.post('/register', async function(req, res) {
         req.body.mail,
         req.body.password
     );
-    status.getStatus(answer["status"], answer["msg"], res);
+    status.getStatus(answer["status"], answer["msg"], answer["code"], res);
 });
 
 module.exports = app;
