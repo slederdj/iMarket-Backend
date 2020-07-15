@@ -1,6 +1,6 @@
 function Envio(mensaje, data) {
     this.mensaje = mensaje;
-    this.data = data;    
+    this.code = data;    
 }
 
 module.exports = Envio;

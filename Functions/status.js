@@ -1,7 +1,7 @@
 var Envio = require("../Models/Envio");
 const HttpStatus = require('http-status-codes');
 
-function getStatus(estado, mensaje, res) {
+function getStatus(estado, mensaje, dato, res) {
     let envio;
     switch (estado) {
         case HttpStatus.INTERNAL_SERVER_ERROR:
@@ -21,7 +21,7 @@ function getStatus(estado, mensaje, res) {
             res.status(HttpStatus.CONTINUE).send(envio);
             break;
             default:
-                envio = new Envio("Resultado obtenido", mensaje);
+                envio = new Envio(mensaje, dato);
                 res.status(HttpStatus.OK).send(envio);
                 break;
     }

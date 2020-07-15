@@ -26,6 +26,40 @@ async function ExecuteQuery(query) {
     }
 }
 
+async function checkTF(valor_procedimiento) {
+    let resultado;
+    try {
+        resultado = await valor_procedimiento["rows"][0];
+        console.log(resultado)
+        if (resultado["dato"] === 1) {
+            resultado = { "status": HttpStatus.CONTINUE, "msg": resultado["msg"] };
+        } else {
+            resultado = { "status": HttpStatus.EXPECTATION_FAILED, "msg": resultado["msg"] };
+        }
+    } catch (err) {
+        resultado = { "status": HttpStatus.INTERNAL_SERVER_ERROR, "msg": "" }
+    }
+    console.log(resultado)
+    return resultado;
+}
+
+async function checkList(valor_procedimiento) {
+    let resultado;
+    try {
+        resultado = await valor_procedimiento["rows"];
+        if (resultado[0] === undefined)
+            resultado = { "status": HttpStatus.ACCEPTED, "msg": [] };
+        else
+            resultado = { "status": HttpStatus.OK, "msg": resultado };
+    } catch (err) {
+        resultado = { "status": HttpStatus.INTERNAL_SERVER_ERROR, "msg": "" };
+    }
+    return resultado;
+}
+
 module.exports = {
-    ExecuteQuery
+    ExecuteQuery,
+    checkTF,
+    checkList
+    
 }
