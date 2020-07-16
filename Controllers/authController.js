@@ -28,4 +28,13 @@ app.post('/register', async function(req, res) {
     status.getStatus(answer["status"], answer["msg"], answer["code"], res);
 });
 
+app.get('/user', async function(req, res) {
+    let answer = await authManager.get_info_manager(req.query.user_id);
+    if (answer["status"] === HttpStatus.CONTINUE) {
+        res.status(HttpStatus.OK).send({"mensaje": answer["msg"], "data": answer["data"], "code":answer.code});
+    } else {
+        status.getStatus(answer["status"], answer["msg"], res);
+    }
+});
+
 module.exports = app;
