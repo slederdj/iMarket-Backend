@@ -5,7 +5,7 @@ const HttpStatus = require('http-status-codes');
 
 const app = express();
 
-app.post('/List', async function(req, res){
+app.get('/List', async function(req, res){
     let answer = await cartManager.display_cart_list_manager(
         req.query.id_usr,
         req.query.id_store
@@ -17,7 +17,7 @@ app.post('/List', async function(req, res){
     }
 });
 
-app.post('/Product', async function(req, res){
+app.get('/Product', async function(req, res){
     let answer = await cartManager.display_cart_product_manager(
         req.query.id_list,
         req.query.name_product != undefined ? req.query.name_product : null,
