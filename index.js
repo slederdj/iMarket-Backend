@@ -1,10 +1,15 @@
 require('./config');
-
+const http = require('http');
+const https = require('https');
+const fs = require("fs");
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const cors = require('cors');
-
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+};
 const app = express();
 
 function config(){
@@ -26,4 +31,7 @@ app.use(cors())
 
 app.use(require('./router'));
 app.use(express.static('client'));
-app.listen(process.env.PORT, () => console.log(`Escuchando en el puerto ${process.env.PORT}!`));
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(options, app);
+httpsServer.listen(process.env.PORT, () => console.log(`Escuchando en el puerto ${process.env.PORT}!`));
+//app.listen(process.env.PORT, () => console.log(`Escuchando en el puerto ${process.env.PORT}!`));
