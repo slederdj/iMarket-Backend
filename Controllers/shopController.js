@@ -8,7 +8,7 @@ const app = express();
 app.get('/shops', async function(req, res){
     let answer = await shopManager.display_shops_manager(
         req.query.pageNumber != undefined ? req.query.pageNumber : 1,
-        req.query.pageSize != undefined ? req.query.name_product : 6
+        req.query.pageSize != undefined ? req.query.pageSize : 6
     );
     if (answer["status"] === HttpStatus.CONTINUE) {
         res.status(HttpStatus.OK).send({ "mensaje": answer["msg"], "data": answer["data"], "code": answer["code"]});
