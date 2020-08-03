@@ -33,5 +33,5 @@ app.use(require('./router'));
 app.use(express.static('client'));
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(options, app);
-httpsServer.listen(process.env.PORT, () => console.log(`Escuchando en el puerto ${process.env.PORT}!`));
-//app.listen(process.env.PORT, () => console.log(`Escuchando en el puerto ${process.env.PORT}!`));
+httpServer.listen(process.env.PORT, () => console.log(`Escuchando en el puerto ${process.env.PORT}!`));
+httpsServer.listen(3002, () => console.log(`Escuchando en el puerto 3002!`));
