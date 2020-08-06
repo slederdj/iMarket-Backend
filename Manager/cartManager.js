@@ -52,8 +52,28 @@ async function add_new_list_manager(client_id, shop_id, list_name) {
     }
     return result;
 }
+
+async function add_new_product_list_manager(product_id, list_id, product_count, stat) {
+    let result = await query_manager.ExecuteQuery(`SELECT * FROM addNewProductList(${product_id}, ${list_id}, ${product_count}, '${stat}')`);
+    if (result["status"] == HttpStatus.CONTINUE){
+        try{
+            result = result["msg"]["rows"][0] 
+            console.log(result);
+            if (result.code === 1) {
+                result = {"code": result.code, "status": HttpStatus.CONTINUE, "msg": result.msg };
+            } else {
+                result = {"code": result.code, "status": HttpStatus.EXPECTATION_FAILED, "msg": result.msg};
+            }
+        } catch (err) {
+            result = { "status": HttpStatus.INTERNAL_SERVER_ERROR, "msg": ""}
+        }
+    }
+    return result;
+}
+
 module.exports = {
     display_cart_list_manager,
     display_cart_product_manager,
-    add_new_list_manager
+    add_new_list_manager,
+    add_new_product_list_manager
 };
