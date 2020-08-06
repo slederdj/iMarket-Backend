@@ -18,6 +18,7 @@ app.get('/shops', async function(req, res){
 });
 
 app.get('/category', async function(req, res){
+    console.log(req.query);   
     let answer = await shopManager.display_categoty_manager(
         req.query.id_store
     );

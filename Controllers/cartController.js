@@ -30,5 +30,16 @@ app.get('/Product', async function(req, res){
         status.getStatus(answer["status"], answer["msg"], answer["code"],res);
     }
 });
+app.put('/Add_list', async function(req, res){
+    let answer = await cartManager.add_new_list_manager(
+        req.body.client_id, 
+        req.body.shop_id,
+        req.body.list_name
+    );
+    if (answer["status"] == HttpStatus.CONTINUE)
+        res.status(HttpStatus.OK).send({ "mensaje": answer["msg"], "code": answer["code"]});
+    else
+        status.getStatus(answer["status"], answer["msg"], answer["code"], res);
+});
 
 module.exports = app;
