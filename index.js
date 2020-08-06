@@ -1,6 +1,7 @@
 require('./config');
 const http = require('http');
 const https = require('https');
+const morgan = require('morgan');
 const fs = require("fs");
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ const options = {
 const app = express();
 
 function config(){
+    app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use((req, res, next) => {
