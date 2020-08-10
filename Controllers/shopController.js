@@ -37,7 +37,6 @@ app.get('/Products', async function(req, res){
         req.query.pageNumber != undefined ? req.query.pageNumber : null,
         req.query.pageSize != undefined ? req.query.pageSize : null,
     );
-    console.log(answer)
     if (answer["status"] === HttpStatus.CONTINUE) {
         res.status(HttpStatus.OK).send({ "mensaje": answer["msg"], "data": answer["data"], "code": answer["code"]});
     } else {
