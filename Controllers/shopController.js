@@ -32,8 +32,8 @@ app.get('/category', async function(req, res){
 app.get('/Products', async function(req, res){
     let answer = await shopManager.display_products_manager(
         req.query.id_store,
-        req.query.prod_name != undefined ? req.query.name_product : null,
-        req.query.cat_name != undefined ? req.query.name_product : null,
+        req.query.prod_name != undefined ? req.query.prod_name : null,
+        req.query.cat_name != undefined ? req.query.cat_name : null,
         req.query.pageNumber != undefined ? req.query.pageNumber : null,
         req.query.pageSize != undefined ? req.query.pageSize : null,
     );
