@@ -55,4 +55,16 @@ app.put('/Add_product', async function(req, res){
         status.getStatus(answer["status"], answer["msg"], answer["code"], res);
 });
 
+app.put('/delete_product', async function(req, res){
+    let answer = await cartManager.delete_product_list_manager(
+        req.body.product_id, 
+        req.body.list_id
+    );
+    if (answer["status"] == HttpStatus.CONTINUE)
+        res.status(HttpStatus.OK).send({ "mensaje": answer["msg"], "code": answer["code"]});
+    else
+        status.getStatus(answer["status"], answer["msg"], answer["code"], res);
+});
+
+
 module.exports = app;

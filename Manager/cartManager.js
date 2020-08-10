@@ -71,9 +71,27 @@ async function add_new_product_list_manager(product_id, list_id, product_count, 
     return result;
 }
 
+async function delete_product_list_manager(product_id, list_id) {
+    let result = await query_manager.ExecuteQuery(`SELECT * FROM deleteProductList(${product_id}, ${list_id})`);
+    if (result["status"] == HttpStatus.CONTINUE){
+        try{
+            result = result["msg"]["rows"][0] 
+            console.log(result);
+            if (result.code === 1) {
+                result = {"code": result.code, "status": HttpStatus.CONTINUE, "msg": result.msg };
+            } else {
+                result = {"code": result.code, "status": HttpStatus.EXPECTATION_FAILED, "msg": result.msg};
+            }
+        } catch (err) {
+            result = { "status": HttpStatus.INTERNAL_SERVER_ERROR, "msg": ""}
+        }
+    }
+    return result;
+}
 module.exports = {
     display_cart_list_manager,
     display_cart_product_manager,
     add_new_list_manager,
-    add_new_product_list_manager
+    add_new_product_list_manager,
+    delete_product_list_manager
 };
