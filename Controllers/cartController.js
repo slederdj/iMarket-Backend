@@ -20,7 +20,7 @@ app.get('/List', async function(req, res){
 app.get('/Product', async function(req, res){
     let answer = await cartManager.display_cart_product_manager(
         req.query.id_list,
-        req.query.name_product != undefined ? req.query.name_product : null,
+        req.query.name_product != undefined ? `'${req.query.name_product}'`: null,
         req.query.pageNumber != undefined ? req.query.pageNumber : null,
         req.query.pageSize != undefined ? req.query.pageSize : null,
     );
