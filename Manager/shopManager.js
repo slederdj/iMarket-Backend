@@ -38,6 +38,7 @@ async function display_categoty_manager(id_store) {
 async function display_products_manager(id_store, prod_name, cat_name, pageNumber, pageSize) {
     let result = await query_manager.ExecuteQuery(
         `SELECT * FROM displayProducts(${id_store}, ${prod_name}, ${cat_name}, ${pageNumber}, ${pageSize})`);
+    console.log(prod_name);
     if (result["status"] == HttpStatus.CONTINUE){
         try{
             result = result["msg"]["rows"] 
