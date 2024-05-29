@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
-app.use('/user', require('./Controllers/userController'));
+app.use('/auth', require('./Controllers/authController'));
+app.use('/cart', require('./Controllers/cartController'));
+app.use('/shop', require('./Controllers/shopController'));
 
 module.exports = app;

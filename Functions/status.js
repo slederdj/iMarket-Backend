@@ -1,7 +1,7 @@
 var Envio = require("../Models/Envio");
 const HttpStatus = require('http-status-codes');
 
-function getStatus(estado, mensaje, res) {
+function getStatus(estado, mensaje, dato, res) {
     let envio;
     switch (estado) {
         case HttpStatus.INTERNAL_SERVER_ERROR:
@@ -16,14 +16,10 @@ function getStatus(estado, mensaje, res) {
             envio = new envio("No hay datos almacenados", [])
             res.status(HttpStatus.ACCEPTED).send(envio);
             break;
-        case HttpStatus.CONTINUE:
-            envio = new Envio(mensaje,[])
-            res.status(HttpStatus.CONTINUE).send(envio);
+        default:
+            envio = new Envio(mensaje, dato);
+            res.status(HttpStatus.OK).send(envio);
             break;
-            default:
-                envio = new Envio("Resultado obtenido", mensaje);
-                res.status(HttpStatus.OK).send(envio);
-                break;
     }
 }
 
