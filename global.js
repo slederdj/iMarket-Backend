@@ -1,9 +1,9 @@
 var config = {
     user: 'postgres',
-    password: 'adoptaTecpw',
-    host: '35.224.149.173',
-    database: 'iMarket',
-    port: 5432
+    password: '*********',
+    host: '**********',
+    database: '********',
+    port: 0000
 };
 
 module.exports = {
